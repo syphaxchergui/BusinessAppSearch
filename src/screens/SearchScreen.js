@@ -69,7 +69,8 @@ const SearchScreen = () => {
             <Resultslist results={filterResultByPrice('$$')} header="Bit Pricer" />
             <Resultslist results={filterResultByPrice('$$$')} header="Big Spender !" />
             <Resultslist results={filterResultByPrice('$$$$')} header="Big Spender++ !" />
-        </ScrollView> : <Image
+        </ScrollView> 
+        :  <Image
             style={styles.image}
             source={require('../../assets/loading.gif')}
          />}
