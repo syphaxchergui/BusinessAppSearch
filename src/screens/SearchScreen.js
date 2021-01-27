@@ -5,6 +5,7 @@ import LocationSearchBar from '../components/LocationSearchBar';
 import yelp from '../api/yelp';
 import Resultslist from '../components/ResultsList';
 import { Feather } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const SearchScreen = () => {
@@ -13,6 +14,9 @@ const SearchScreen = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [location, setLocation] = useState('');
     const [loaded, setLoaded] = useState(false);
+
+
+  
   
     const searchApi = async (searchTerm, searchLocation) => {
         try {
@@ -63,17 +67,18 @@ const SearchScreen = () => {
         
 
         {errorMessage ? <Text style={{alignSelf:'center', fontSize: 18}}>{errorMessage}</Text> : null}
-        {results.length>0 ? null : <Text style={{fontSize:18, alignSelf: 'center'}}> Oops! No result!</Text>}
         {loaded ? <ScrollView>
             <Resultslist results={filterResultByPrice('$')} header="Cost Effective" />
             <Resultslist results={filterResultByPrice('$$')} header="Bit Pricer" />
             <Resultslist results={filterResultByPrice('$$$')} header="Big Spender !" />
             <Resultslist results={filterResultByPrice('$$$$')} header="Big Spender++ !" />
-        </ScrollView> 
-        :  <Image
-            style={styles.image}
-            source={require('../../assets/loading.gif')}
-         />}
+            </ScrollView> 
+        :   <Image
+                style={styles.image}
+                source={require('../../assets/loading.gif')}
+            />
+        } 
+        {results.length >0 ? null : <Text style={{fontSize:18, alignSelf: 'center'}}> Oops! No result!</Text>}
     </>
 };
 
